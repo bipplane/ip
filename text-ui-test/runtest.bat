@@ -15,7 +15,14 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+java -classpath ..\bin Chaewon < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+IF ERRORLEVEL 1 (
+    echo Test result: FAILED
+    exit /b 1
+) ELSE (
+    echo Test result: PASSED
+    exit /b 0
+)
