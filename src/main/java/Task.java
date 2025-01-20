@@ -1,4 +1,5 @@
-public class Task {
+// Description: Abstract class for Task objects.
+public abstract class Task {
     protected String taskName;
     protected boolean isDone;
 

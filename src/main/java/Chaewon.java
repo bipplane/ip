@@ -14,12 +14,53 @@ public class Chaewon {
     while (true) {
         String input = scanner.nextLine();
         String[] parts = input.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
 
+        if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
+            for (int i = 1; i < parts.length; i++) {
+                stringBuilder.append(parts[i] + " ");
+            }
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        }
         switch (parts[0]) {
             case "bye":
                 break;
+            case "todo":
+                list.add(new ToDo(stringBuilder.toString()));
+                Chaewon.printUnderscore();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                Chaewon.printUnderscore();
+                break;
+            case "deadline":
+                String[] deadlineParts = stringBuilder.toString().split(" /by ");
+                String description = deadlineParts[0];
+                String by = deadlineParts[1];
+                list.add(new Deadline(description, by));
+
+                Chaewon.printUnderscore();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                Chaewon.printUnderscore();
+                break;
+            case "event":
+                String[] eventParts = stringBuilder.toString().split(" /from | /to ");
+                String description2 = eventParts[0];
+                String from = eventParts[1];
+                String to = eventParts[2];
+                list.add(new Event(description2, from, to));
+
+                Chaewon.printUnderscore();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(list.get(list.size() - 1).toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                Chaewon.printUnderscore();
+                break;
             case "list":
                 Chaewon.printUnderscore();
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println(i + 1 + ". " + list.get(i).toString());
                 }
@@ -43,7 +84,7 @@ public class Chaewon {
                 break;
             default:
                 Chaewon.printUnderscore();
-                list.add(new Task(input));
+                list.add(new ToDo(input));
                 System.out.println("added: " + input);
                 Chaewon.printUnderscore();
                 break;
