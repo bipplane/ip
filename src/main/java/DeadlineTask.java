@@ -1,7 +1,7 @@
 // Description: A class that represents a deadline task.
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     protected String by;
-    public Deadline(String taskName, String by) {
+    public DeadlineTask(String taskName, String by) {
         super(taskName);
         this.by = by;
     }

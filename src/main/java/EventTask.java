@@ -1,8 +1,8 @@
 // Description: A class that represents an event task.
-public class Event extends Task {
+public class EventTask extends Task {
     protected String from;
     protected String to;
-    public Event(String taskName, String from, String to) {
+    public EventTask(String taskName, String from, String to) {
         super(taskName);
         this.from = from;
         this.to = to;

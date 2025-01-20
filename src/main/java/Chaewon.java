@@ -1,105 +1,160 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents the Chaewon chatbot.
+ */
 public class Chaewon {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
+    private final Scanner scanner;
+    private final ArrayList<Task> list;
 
-        Chaewon.printUnderscore();
+    public static void main(String[] args) {
+        Chaewon chaewon = new Chaewon();
+        chaewon.run();
+    }
+
+    public Chaewon() {
+        scanner = new Scanner(System.in);
+        list = new ArrayList<>();
+        printUnderscore();
         System.out.println("Hello! I'm Kim Chaewon!\n"
                 + "What can I do for you?");
-        Chaewon.printUnderscore();
+        printUnderscore();
+    }
 
-    while (true) {
-        String input = scanner.nextLine();
-        String[] parts = input.split(" ");
-        StringBuilder stringBuilder = new StringBuilder();
+    public void run() {
+        while (true) {
+            String input = scanner.nextLine();
+            String[] parts = input.split(" ");
+            StringBuilder stringBuilder = new StringBuilder();
 
-        if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
-            for (int i = 1; i < parts.length; i++) {
-                String part = parts[i] + " ";
-                stringBuilder.append(part);
-            }
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        }
-        switch (parts[0]) {
-            case "bye":
-                break;
-            case "todo":
-                list.add(new ToDo(stringBuilder.toString()));
-                Chaewon.printUnderscore();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(list.get(list.size() - 1).toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                Chaewon.printUnderscore();
-                break;
-            case "deadline":
-                String[] deadlineParts = stringBuilder.toString().split(" /by ");
-                String description = deadlineParts[0];
-                String by = deadlineParts[1];
-                list.add(new Deadline(description, by));
+            if (parts.length > 1 && (parts[0].equals("todo") || parts[0].equals("deadline")
+                    || parts[0].equals("event"))) {
 
-                Chaewon.printUnderscore();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(list.get(list.size() - 1).toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                Chaewon.printUnderscore();
-                break;
-            case "event":
-                String[] eventParts = stringBuilder.toString().split(" /from | /to ");
-                String description2 = eventParts[0];
-                String from = eventParts[1];
-                String to = eventParts[2];
-                list.add(new Event(description2, from, to));
-
-                Chaewon.printUnderscore();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(list.get(list.size() - 1).toString());
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                Chaewon.printUnderscore();
-                break;
-            case "list":
-                Chaewon.printUnderscore();
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println(i + 1 + ". " + list.get(i).toString());
+                for (int i = 1; i < parts.length; i++) {
+                    String part = parts[i] + " ";
+                    stringBuilder.append(part);
                 }
-                Chaewon.printUnderscore();
-                break;
-            case "mark":
-                int index = Integer.parseInt(parts[1]) - 1;
-                list.get(index).markAsDone();
-                Chaewon.printUnderscore();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list.get(index).toString());
-                Chaewon.printUnderscore();
-                break;
-            case "unmark":
-                int index2 = Integer.parseInt(parts[1]) - 1;
-                list.get(index2).markAsUndone();
-                Chaewon.printUnderscore();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(list.get(index2).toString());
-                Chaewon.printUnderscore();
-                break;
-            default:
-                Chaewon.printUnderscore();
-                list.add(new ToDo(input));
-                System.out.println("added: " + input);
-                Chaewon.printUnderscore();
-                break;
-        }
-        if (input.equals("bye")) {
-            break;
+                stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            }
+            try {
+                switch (parts[0]) {
+                    case "bye":
+                        handleBye();
+                        return;
+                    case "todo":
+                        handleTodo(parts, stringBuilder);
+                        break;
+                    case "deadline":
+                        handleDeadline(stringBuilder);
+                        break;
+                    case "event":
+                        handleEvent(stringBuilder);
+                        break;
+                    case "list":
+                        handleList();
+                        break;
+                    case "mark":
+                        handleMark(parts);
+                        break;
+                    case "unmark":
+                        handleUnmark(parts);
+                        break;
+                    default:
+                        handleUnknownCommand(parts);
+                }
+            } catch (Exception e) {
+                printUnderscore();
+                System.out.println("Error: " + e.getMessage());
+                printUnderscore();
+            }
         }
     }
 
-        Chaewon.printUnderscore();
+    private void handleBye() {
+        printUnderscore();
         System.out.println("Bye! Get an A for this mod and" +
                 " I'll reunite IZ*ONE for you <3");
-        Chaewon.printUnderscore();
+        printUnderscore();
     }
+
+    private void handleTodo(String[] parts, StringBuilder stringBuilder) {
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("The description of a todo cannot be empty.");
+        }
+        list.add(new TodoTask(stringBuilder.toString()));
+        printUnderscore();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(list.get(list.size() - 1).toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        printUnderscore();
+    }
+
+    private void handleDeadline(StringBuilder stringBuilder) {
+        String[] deadlineParts = stringBuilder.toString().split(" /by ");
+        if (deadlineParts.length < 2) {
+            throw new IllegalArgumentException("Invalid deadline format. Use: deadline <description> /by <time>");
+        }
+        String description = deadlineParts[0];
+        String by = deadlineParts[1];
+        list.add(new DeadlineTask(description, by));
+        printUnderscore();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(list.get(list.size() - 1).toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        printUnderscore();
+    }
+
+    private void handleEvent(StringBuilder stringBuilder) {
+        String[] eventParts = stringBuilder.toString().split(" /from | /to ");
+        if (eventParts.length < 3) {
+            throw new IllegalArgumentException("Invalid event format. Use: event <description> /from <start time> /to <end time>");
+        }
+        String description = eventParts[0];
+        String from = eventParts[1];
+        String to = eventParts[2];
+        list.add(new EventTask(description, from, to));
+        printUnderscore();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(list.get(list.size() - 1).toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        printUnderscore();
+    }
+
+    private void handleList() {
+        printUnderscore();
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + ". " + list.get(i).toString());
+        }
+        printUnderscore();
+    }
+
+    private void handleMark(String[] parts) {
+        int index = Integer.parseInt(parts[1]) - 1;
+        list.get(index).markAsDone();
+        printUnderscore();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(list.get(index).toString());
+        printUnderscore();
+    }
+
+    private void handleUnmark(String[] parts) {
+        int index = Integer.parseInt(parts[1]) - 1;
+        list.get(index).markAsUndone();
+        printUnderscore();
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println(list.get(index).toString());
+        printUnderscore();
+    }
+
+    private void handleUnknownCommand(String[] parts) {
+        if (parts[0].equals("")) {
+            throw new IllegalArgumentException("Please enter a command.");
+        }
+        throw new IllegalArgumentException("Unknown command: " + parts[0]);
+    }
+
     // Method to print a line of underscores for my lazy ahh
     public static void printUnderscore() {
         System.out.println("____________________________________________________________");
