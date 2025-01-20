@@ -60,6 +60,9 @@ public class Chaewon {
                     case "unmark":
                         handleUnmark(parts);
                         break;
+                    case "delete":
+                        handleDelete(parts);
+                        break;
                     default:
                         handleUnknownCommand(parts);
                 }
@@ -71,6 +74,7 @@ public class Chaewon {
         }
     }
 
+    // Method to handle the bye command
     private void handleBye() {
         printUnderscore();
         System.out.println("Bye! Get an A for this mod and" +
@@ -78,6 +82,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the todo command
     private void handleTodo(String[] parts, StringBuilder stringBuilder) {
         if (parts.length < 2) {
             throw new IllegalArgumentException("The description of a todo cannot be empty.");
@@ -90,6 +95,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the deadline command
     private void handleDeadline(StringBuilder stringBuilder) {
         String[] deadlineParts = stringBuilder.toString().split(" /by ");
         if (deadlineParts.length < 2) {
@@ -105,6 +111,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the event command
     private void handleEvent(StringBuilder stringBuilder) {
         String[] eventParts = stringBuilder.toString().split(" /from | /to ");
         if (eventParts.length < 3) {
@@ -121,6 +128,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the list command
     private void handleList() {
         printUnderscore();
         System.out.println("Here are the tasks in your list:");
@@ -130,6 +138,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the mark command
     private void handleMark(String[] parts) {
         int index = Integer.parseInt(parts[1]) - 1;
         list.get(index).markAsDone();
@@ -139,6 +148,7 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle the unmark command
     private void handleUnmark(String[] parts) {
         int index = Integer.parseInt(parts[1]) - 1;
         list.get(index).markAsUndone();
@@ -148,11 +158,23 @@ public class Chaewon {
         printUnderscore();
     }
 
+    // Method to handle unknown commands
     private void handleUnknownCommand(String[] parts) {
         if (parts[0].equals("")) {
             throw new IllegalArgumentException("Please enter a command.");
         }
         throw new IllegalArgumentException("Unknown command: " + parts[0]);
+    }
+
+    // Method to handle the delete command
+    private void handleDelete(String[] parts) {
+        int index = Integer.parseInt(parts[1]) - 1;
+        Task removedTask = list.remove(index);
+        printUnderscore();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask.toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        printUnderscore();
     }
 
     // Method to print a line of underscores for my lazy ahh
