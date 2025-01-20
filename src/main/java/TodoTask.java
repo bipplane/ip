@@ -1,6 +1,6 @@
 // Description: A class that represents a ToDo task.
-public class ToDo extends Task {
-    public ToDo(String taskName) {
+public class TodoTask extends Task {
+    public TodoTask(String taskName) {
         super(taskName);
     }
 
