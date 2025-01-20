@@ -160,7 +160,7 @@ public class Chaewon {
 
     // Method to handle unknown commands
     private void handleUnknownCommand(String[] parts) {
-        if (parts[0].equals("")) {
+        if (parts[0].isEmpty()) {
             throw new IllegalArgumentException("Please enter a command.");
         }
         throw new IllegalArgumentException("Unknown command: " + parts[0]);
