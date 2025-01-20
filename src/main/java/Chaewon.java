@@ -18,7 +18,8 @@ public class Chaewon {
 
         if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
             for (int i = 1; i < parts.length; i++) {
-                stringBuilder.append(parts[i] + " ");
+                String part = parts[i] + " ";
+                stringBuilder.append(part);
             }
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
