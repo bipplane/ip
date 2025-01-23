@@ -1,4 +1,6 @@
-// Description: Abstract class for Task objects.
+package tasks;
+
+// Description: Abstract class for tasks.Task objects.
 public abstract class Task {
     protected String taskName;
     protected boolean isDone;

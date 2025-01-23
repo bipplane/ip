@@ -1,3 +1,5 @@
+package tasks;
+
 // Description: A class that represents an event task.
 public class EventTask extends Task {
     protected String from;

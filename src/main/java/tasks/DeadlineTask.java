@@ -1,3 +1,5 @@
+package tasks;
+
 // Description: A class that represents a deadline task.
 public class DeadlineTask extends Task {
     protected String by;
