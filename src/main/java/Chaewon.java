@@ -1,3 +1,4 @@
+import tasks.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -66,7 +67,7 @@ public class Chaewon {
                     default:
                         handleUnknownCommand(parts);
                 }
-            } catch (Exception e) {
+            } catch (ChaewonException e) {
                 printUnderscore();
                 System.out.println("Error: " + e.getMessage());
                 printUnderscore();
@@ -99,7 +100,7 @@ public class Chaewon {
     private void handleDeadline(StringBuilder stringBuilder) {
         String[] deadlineParts = stringBuilder.toString().split(" /by ");
         if (deadlineParts.length < 2) {
-            throw new IllegalArgumentException("Invalid deadline format. Use: deadline <description> /by <time>");
+            throw new ChaewonException("Invalid deadline format. Use: deadline <description> /by <time>");
         }
         String description = deadlineParts[0];
         String by = deadlineParts[1];
@@ -115,12 +116,13 @@ public class Chaewon {
     private void handleEvent(StringBuilder stringBuilder) {
         String[] eventParts = stringBuilder.toString().split(" /from | /to ");
         if (eventParts.length < 3) {
-            throw new IllegalArgumentException("Invalid event format. Use: event <description> /from <start time> /to <end time>");
+            throw new ChaewonException("Invalid event format. " +
+                    "Use: event <description> /from <start time> /to <end time>");
         }
         String description = eventParts[0];
         String from = eventParts[1];
         String to = eventParts[2];
-        list.add(new EventTask(description, from, to));
+        list.add(new tasks.EventTask(description, from, to));
         printUnderscore();
         System.out.println("Got it. I've added this task:");
         System.out.println(list.get(list.size() - 1).toString());
@@ -161,9 +163,9 @@ public class Chaewon {
     // Method to handle unknown commands
     private void handleUnknownCommand(String[] parts) {
         if (parts[0].isEmpty()) {
-            throw new IllegalArgumentException("Please enter a command.");
+            throw new ChaewonException("Please enter a command.");
         }
-        throw new IllegalArgumentException("Unknown command: " + parts[0]);
+        throw new ChaewonException("Unknown command: " + parts[0]);
     }
 
     // Method to handle the delete command
