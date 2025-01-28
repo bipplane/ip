@@ -1,6 +1,7 @@
 import tasks.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 /**
  * Represents the Chaewon chatbot.
@@ -27,9 +28,10 @@ public class Chaewon {
         while (true) {
             String input = scanner.nextLine();
             String[] parts = input.split(" ");
+            String command = parts[0];
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (parts.length > 1 && (parts[0].equals("todo") || parts[0].equals("deadline")
+            if (parts.length > 1 && (command.equals("todo") || command.equals("deadline")
                     || parts[0].equals("event"))) {
 
                 for (int i = 1; i < parts.length; i++) {
@@ -39,7 +41,7 @@ public class Chaewon {
                 stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             }
             try {
-                switch (parts[0]) {
+                switch (command) {
                     case "bye":
                         handleBye();
                         return;
@@ -75,7 +77,9 @@ public class Chaewon {
         }
     }
 
-    // Method to handle the bye command
+    /**
+     * Handles the `bye` command by printing a goodbye message and exiting the program.
+     */
     private void handleBye() {
         printUnderscore();
         System.out.println("Bye! Get an A for this mod and" +
@@ -83,10 +87,16 @@ public class Chaewon {
         printUnderscore();
     }
 
-    // Method to handle the todo command
+    /**
+     * Handles the `todo` command by adding a new ToDo task to the list.
+     *
+     * @param parts          The parts of the input command split by spaces.
+     * @param stringBuilder  The StringBuilder containing the task description.
+     * @throws ChaewonException if the description of the todo is empty.
+     */
     private void handleTodo(String[] parts, StringBuilder stringBuilder) {
         if (parts.length < 2) {
-            throw new IllegalArgumentException("The description of a todo cannot be empty.");
+            throw new ChaewonException("The description of a todo cannot be empty.");
         }
         list.add(new TodoTask(stringBuilder.toString()));
         printUnderscore();
@@ -96,7 +106,12 @@ public class Chaewon {
         printUnderscore();
     }
 
-    // Method to handle the deadline command
+    /**
+     * Handles the `deadlime` command by adding a new ToDo task to the list.
+     *
+     * @param stringBuilder     The StringBuilder containing the task description.
+     * @throws ChaewonException if the deadline format is invalid.
+     */
     private void handleDeadline(StringBuilder stringBuilder) {
         String[] deadlineParts = stringBuilder.toString().split(" /by ");
         if (deadlineParts.length < 2) {
@@ -112,7 +127,12 @@ public class Chaewon {
         printUnderscore();
     }
 
-    // Method to handle the event command
+    /**
+     *
+     * Handles the `event` command by adding a new Event task to the list.
+     * @param stringBuilder     The StringBuilder containing the task description.
+     * @throws ChaewonException if the event format is invalid.
+     */
     private void handleEvent(StringBuilder stringBuilder) {
         String[] eventParts = stringBuilder.toString().split(" /from | /to ");
         if (eventParts.length < 3) {
@@ -130,37 +150,65 @@ public class Chaewon {
         printUnderscore();
     }
 
-    // Method to handle the list command
+    /**
+     * Handles the `list` command by printing out all the tasks in the list.
+     */
     private void handleList() {
         printUnderscore();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + ". " + list.get(i).toString());
+        if (list.isEmpty()) {
+            System.out.println("You have no tasks in the list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(i + 1 + ". " + list.get(i).toString());
+            }
         }
         printUnderscore();
     }
 
-    // Method to handle the mark command
+    /**
+     * Handles the `mark` command by marking a task as done.
+     *
+     * @param parts             The parts of the input command split by spaces.
+     * @throws ChaewonException if the index of the task to mark is invalid.
+     */
     private void handleMark(String[] parts) {
-        int index = Integer.parseInt(parts[1]) - 1;
-        list.get(index).markAsDone();
         printUnderscore();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(list.get(index).toString());
+        int index = Integer.parseInt(parts[1]) - 1;
+        if (index < 0 || index >= list.size()) {
+            throw new ChaewonException("Invalid task number.");
+        } else {
+            list.get(index).markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(list.get(index).toString());
+        }
         printUnderscore();
     }
 
-    // Method to handle the unmark command
+    /**
+     * Handles the `unmark` command by marking a task as not done.
+     *
+     * @param parts            The parts of the input command split by spaces.
+     * @throws ChaewonException if the index of the task to unmark is invalid.
+     */
     private void handleUnmark(String[] parts) {
         int index = Integer.parseInt(parts[1]) - 1;
-        list.get(index).markAsUndone();
-        printUnderscore();
+        if (index < 0 || index >= list.size()) {
+            throw new ChaewonException("Invalid task number.");
+        } else {
+            list.get(index).markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(list.get(index).toString());
+            System.out.println(list.get(index).toString());
+        }
         printUnderscore();
     }
 
-    // Method to handle unknown commands
+    /**
+     * Handles an unknown command by throwing a ChaewonException.
+     *
+     * @param parts            The parts of the input command split by spaces.
+     * @throws ChaewonException if the command is empty or unknown.
+     */
     private void handleUnknownCommand(String[] parts) {
         if (parts[0].isEmpty()) {
             throw new ChaewonException("Please enter a command.");
@@ -168,18 +216,28 @@ public class Chaewon {
         throw new ChaewonException("Unknown command: " + parts[0]);
     }
 
-    // Method to handle the delete command
+    /**
+     * Handles the `delete` command by deleting a task from the list.
+     *
+     * @param parts            The parts of the input command split by spaces.
+     */
     private void handleDelete(String[] parts) {
-        int index = Integer.parseInt(parts[1]) - 1;
-        Task removedTask = list.remove(index);
         printUnderscore();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removedTask.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        int index = Integer.parseInt(parts[1]) - 1;
+        if (index < 0 || index >= list.size()) {
+            throw new ChaewonException("Invalid task number.");
+        } else {
+            Task removedTask = list.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(removedTask.toString());
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        }
         printUnderscore();
     }
 
-    // Method to print a line of underscores for my lazy ahh
+    /**
+     * Prints a line of underscores to the console.
+     */
     public static void printUnderscore() {
         System.out.println("____________________________________________________________");
     }
