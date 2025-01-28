@@ -42,32 +42,32 @@ public class Chaewon {
             }
             try {
                 switch (command) {
-                    case "bye":
-                        handleBye();
-                        return;
-                    case "todo":
-                        handleTodo(parts, stringBuilder);
-                        break;
-                    case "deadline":
-                        handleDeadline(stringBuilder);
-                        break;
-                    case "event":
-                        handleEvent(stringBuilder);
-                        break;
-                    case "list":
-                        handleList();
-                        break;
-                    case "mark":
-                        handleMark(parts);
-                        break;
-                    case "unmark":
-                        handleUnmark(parts);
-                        break;
-                    case "delete":
-                        handleDelete(parts);
-                        break;
-                    default:
-                        handleUnknownCommand(parts);
+                case "bye":
+                    handleBye();
+                    return;
+                case "todo":
+                    handleTodo(parts, stringBuilder);
+                    break;
+                case "deadline":
+                    handleDeadline(stringBuilder);
+                    break;
+                case "event":
+                    handleEvent(stringBuilder);
+                    break;
+                case "list":
+                    handleList();
+                    break;
+                case "mark":
+                    handleMark(parts);
+                    break;
+                case "unmark":
+                    handleUnmark(parts);
+                    break;
+                case "delete":
+                    handleDelete(parts);
+                    break;
+                default:
+                    handleUnknownCommand(parts);
                 }
             } catch (ChaewonException e) {
                 printUnderscore();
