@@ -6,30 +6,31 @@ import java.time.format.DateTimeFormatter;
 public class EventTask extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
+    protected DateTimeFormatter formatFrom = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected DateTimeFormatter formatTo = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
 
     public EventTask(String taskName, String from, String to) {
         super(taskName);
-        this.from = LocalDateTime.parse(from, formatter);
-        this.to = LocalDateTime.parse(to, formatter);
+        this.from = LocalDateTime.parse(from, formatFrom);
+        this.to = LocalDateTime.parse(to, formatFrom);
     }
 
     public EventTask(String taskName, String from, String to, boolean isDone) {
         super(taskName, isDone);
-        this.from = LocalDateTime.parse(from, formatter);
-        this.to = LocalDateTime.parse(to, formatter);
+        this.from = LocalDateTime.parse(from, formatFrom);
+        this.to = LocalDateTime.parse(to, formatFrom);
     }
 
     public String getFrom() {
-        return from.format(formatter);
+        return from.format(formatTo);
     }
 
     public String getTo() {
-        return from.format(formatter);
+        return from.format(formatTo);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(formatTo) + " to: " + to.format(formatTo) + ")";
     }
 }
