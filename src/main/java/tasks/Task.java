@@ -1,6 +1,6 @@
+// src/main/java/tasks/Task.java
 package tasks;
 
-// Description: Abstract class for tasks.Task objects.
 public abstract class Task {
     protected String taskName;
     protected boolean isDone;
@@ -8,6 +8,11 @@ public abstract class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+    }
+
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
@@ -20,6 +25,14 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override
