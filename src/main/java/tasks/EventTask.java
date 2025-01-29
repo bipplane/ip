@@ -1,28 +1,31 @@
-// src/main/java/tasks/EventTask.java
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
 
     public EventTask(String taskName, String from, String to) {
         super(taskName);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from, formatter);
+        this.to = LocalDateTime.parse(to, formatter);
     }
 
     public EventTask(String taskName, String from, String to, boolean isDone) {
         super(taskName, isDone);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDateTime.parse(from, formatter);
+        this.to = LocalDateTime.parse(to, formatter);
     }
 
     public String getFrom() {
-        return from;
+        return from.format(formatter);
     }
 
     public String getTo() {
-        return to;
+        return from.format(formatter);
     }
 
     @Override

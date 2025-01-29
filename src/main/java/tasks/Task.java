@@ -1,4 +1,3 @@
-// src/main/java/tasks/Task.java
 package tasks;
 
 public abstract class Task {

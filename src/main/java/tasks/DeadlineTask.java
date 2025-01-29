@@ -1,25 +1,28 @@
-// src/main/java/tasks/DeadlineTask.java
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    protected String by;
+    protected LocalDateTime by;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
 
     public DeadlineTask(String taskName, String by) {
         super(taskName);
-        this.by = by;
+        this.by = LocalDateTime.parse(by, formatter);
     }
 
     public DeadlineTask(String taskName, String by, boolean isDone) {
         super(taskName, isDone);
-        this.by = by;
+        this.by = LocalDateTime.parse(by, formatter);
     }
 
     public String getBy() {
-        return by;
+        return by.format(formatter);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 }
