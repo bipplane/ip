@@ -1,7 +1,12 @@
 import tasks.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  * Represents the Chaewon chatbot.
@@ -18,6 +23,11 @@ public class Chaewon {
     public Chaewon() {
         scanner = new Scanner(System.in);
         list = new ArrayList<>();
+        try {
+            loadTasks();
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved tasks found.");
+        }
         printUnderscore();
         System.out.println("Hello! I'm Kim Chaewon!\n"
                 + "What can I do for you?");
@@ -77,14 +87,71 @@ public class Chaewon {
         }
     }
 
+    private void saveTasks() {
+    try {
+        File file = new File("tasks.txt");
+        FileWriter fileWriter = new FileWriter(file);
+        for (Task task : list) {
+            String taskType = "";
+            if (task instanceof TodoTask) {
+                taskType = "T";
+            } else if (task instanceof DeadlineTask) {
+                taskType = "D";
+            } else if (task instanceof EventTask) {
+                taskType = "E";
+            }
+            String isDone = task.isDone() ? "1" : "0";
+            String taskString = taskType + " | " + isDone + " | " + task.getTaskName();
+            if (task instanceof DeadlineTask) {
+                taskString += " | " + ((DeadlineTask) task).getBy();
+            } else if (task instanceof EventTask) {
+                taskString += " | " + ((EventTask) task).getFrom() + " | " + ((EventTask) task).getTo();
+            }
+            fileWriter.write(taskString + "\n");
+        }
+        fileWriter.close();
+    } catch (IOException e) {
+        System.out.println("Error saving tasks to file.");
+    }
+}
+
+    private void loadTasks() throws FileNotFoundException {
+        File file = new File("tasks.txt");
+        Scanner fileScanner = new Scanner(file);
+        while (fileScanner.hasNextLine()) {
+            String taskString = fileScanner.nextLine();
+            String[] taskParts = taskString.split(" \\| ");
+            String taskType = taskParts[0];
+            boolean isDone = taskParts[1].equals("1");
+            String taskName = taskParts[2];
+            switch (taskType) {
+            case "T":
+                list.add(new TodoTask(taskName, isDone));
+                break;
+            case "D":
+                String by = taskParts[3];
+                list.add(new DeadlineTask(taskName, by, isDone));
+                break;
+            case "E":
+                String from = taskParts[3];
+                String to = taskParts[4];
+                list.add(new EventTask(taskName, from, to, isDone));
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
     /**
      * Handles the `bye` command by printing a goodbye message and exiting the program.
      */
     private void handleBye() {
         printUnderscore();
-        System.out.println("Bye! Get an A for this mod and" +
-                " I'll reunite IZ*ONE for you <3");
+        System.out.println("Bye! Get an A for this mod and "
+                + "I'll reunite IZ*ONE for you <3");
         printUnderscore();
+        saveTasks();
     }
 
     /**
@@ -154,7 +221,6 @@ public class Chaewon {
      * Handles the `list` command by printing out all the tasks in the list.
      */
     private void handleList() {
-        printUnderscore();
         if (list.isEmpty()) {
             System.out.println("You have no tasks in the list.");
         } else {
@@ -173,7 +239,9 @@ public class Chaewon {
      * @throws ChaewonException if the index of the task to mark is invalid.
      */
     private void handleMark(String[] parts) {
-        printUnderscore();
+        if (parts.length < 2) {
+            throw new ChaewonException("Please enter the task number to mark.");
+        }
         int index = Integer.parseInt(parts[1]) - 1;
         if (index < 0 || index >= list.size()) {
             throw new ChaewonException("Invalid task number.");
@@ -192,12 +260,15 @@ public class Chaewon {
      * @throws ChaewonException if the index of the task to unmark is invalid.
      */
     private void handleUnmark(String[] parts) {
+        if (parts.length < 2) {
+            throw new ChaewonException("Please enter the task number to unmark.");
+        }
         int index = Integer.parseInt(parts[1]) - 1;
         if (index < 0 || index >= list.size()) {
             throw new ChaewonException("Invalid task number.");
         } else {
             list.get(index).markAsUndone();
-        System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println("OK, I've marked this task as not done yet:");
             System.out.println(list.get(index).toString());
         }
         printUnderscore();
@@ -222,7 +293,9 @@ public class Chaewon {
      * @param parts            The parts of the input command split by spaces.
      */
     private void handleDelete(String[] parts) {
-        printUnderscore();
+        if (parts.length < 2) {
+            throw new ChaewonException("Please enter the task number to delete.");
+        }
         int index = Integer.parseInt(parts[1]) - 1;
         if (index < 0 || index >= list.size()) {
             throw new ChaewonException("Invalid task number.");
