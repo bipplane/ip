@@ -26,7 +26,7 @@ public class Chaewon {
         try {
             loadTasks();
         } catch (FileNotFoundException e) {
-            System.out.println("No saved tasks found.");
+            File file = new File("tasks.txt");
         }
         printUnderscore();
         System.out.println("Hello! I'm Kim Chaewon!\n"
@@ -174,7 +174,7 @@ public class Chaewon {
     }
 
     /**
-     * Handles the `deadlime` command by adding a new ToDo task to the list.
+     * Handles the `deadline` command by adding a new ToDo task to the list.
      *
      * @param stringBuilder     The StringBuilder containing the task description.
      * @throws ChaewonException if the deadline format is invalid.
@@ -220,7 +220,9 @@ public class Chaewon {
     /**
      * Handles the `list` command by printing out all the tasks in the list.
      */
-    private void handleList() {
+    private void handleList()
+    {
+        printUnderscore();
         if (list.isEmpty()) {
             System.out.println("You have no tasks in the list.");
         } else {
@@ -239,6 +241,7 @@ public class Chaewon {
      * @throws ChaewonException if the index of the task to mark is invalid.
      */
     private void handleMark(String[] parts) {
+        printUnderscore();
         if (parts.length < 2) {
             throw new ChaewonException("Please enter the task number to mark.");
         }
@@ -260,6 +263,7 @@ public class Chaewon {
      * @throws ChaewonException if the index of the task to unmark is invalid.
      */
     private void handleUnmark(String[] parts) {
+        printUnderscore();
         if (parts.length < 2) {
             throw new ChaewonException("Please enter the task number to unmark.");
         }
@@ -293,6 +297,7 @@ public class Chaewon {
      * @param parts            The parts of the input command split by spaces.
      */
     private void handleDelete(String[] parts) {
+        printUnderscore();
         if (parts.length < 2) {
             throw new ChaewonException("Please enter the task number to delete.");
         }
