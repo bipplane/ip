@@ -13,7 +13,7 @@ This is my very own individual software project, featuring a chatbot named after
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
    In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Chaewon.java` file, right-click it, and choose `Run Chaewon.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+1. After that, locate the `src/main/java/chaewon/Chaewon.java` file, right-click it, and choose `Run Chaewon.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
 
    ```
    ____________________________________________________________

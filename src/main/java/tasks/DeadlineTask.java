@@ -18,6 +18,11 @@ public class DeadlineTask extends Task {
         this.by = LocalDateTime.parse(by, formatFrom);
     }
 
+    public DeadlineTask(String taskName, LocalDateTime by, boolean isDone) {
+        super(taskName, isDone);
+        this.by = by;
+    }
+
     public String getBy() {
         return by.format(formatTo);
     }
