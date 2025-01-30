@@ -1,14 +1,10 @@
 package chaewon;
 
-import tasks.*;
 import commands.*;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 
 /**
@@ -33,6 +29,11 @@ public class Chaewon {
             storage.loadTasks();
         } catch (FileNotFoundException e) {
             File file = new File("tasks.txt");
+            try {
+                file.createNewFile();
+            } catch (Exception ex) {
+                ui.printMessage("Error creating file.");
+            }
         }
         ui.welcome();
     }
