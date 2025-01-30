@@ -2,7 +2,6 @@ package commands;
 
 import chaewon.*;
 
-
 public class ListCommand extends Command {
 
     @Override

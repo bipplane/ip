@@ -18,7 +18,7 @@ public class Chaewon {
     private final Scanner scanner = new Scanner(System.in);
     private final Ui ui = new Ui();
     private final TaskList taskList = new TaskList();
-    private final Storage storage = new Storage("tasks.txt");
+    private final Storage storage;
     private final Parser parser = new Parser();
     private boolean isExit = false;
 
@@ -28,6 +28,7 @@ public class Chaewon {
     }
 
     public Chaewon() {
+        this.storage = new Storage("tasks.txt", taskList);
         try {
             storage.loadTasks();
         } catch (FileNotFoundException e) {

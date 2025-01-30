@@ -2,6 +2,9 @@ package chaewon;
 
 import tasks.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,40 +13,51 @@ import java.util.Scanner;
 
 public class Storage {
     protected final String filePath;
-    protected TaskList tasks = new TaskList();
+    protected TaskList tasks;
     protected Ui ui;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, TaskList tasks) {
         this.filePath = filePath;
+        this.tasks = tasks;
+
     }
 
     public void loadTasks() throws FileNotFoundException {
-        File file = new File(filePath);
-        Scanner fileScanner = new Scanner(file);
-        while (fileScanner.hasNextLine()) {
-            String taskString = fileScanner.nextLine();
-            String[] taskParts = taskString.split(" \\| ");
-            String taskType = taskParts[0];
-            boolean isDone = taskParts[1].equals("1");
-            String taskName = taskParts[2];
-            switch (taskType) {
-            case "T":
-                tasks.addTask(new TodoTask(taskName, isDone));
-                break;
-            case "D":
-                String by = taskParts[3];
-                tasks.addTask(new DeadlineTask(taskName, by, isDone));
-                break;
-            case "E":
-                String from = taskParts[3];
-                String to = taskParts[4];
-                tasks.addTask(new EventTask(taskName, from, to, isDone));
-                break;
-            default:
-                break;
-            }
+    File file = new File(filePath);
+    Scanner fileScanner = new Scanner(file);
+    DateTimeFormatter formatTo = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+    while (fileScanner.hasNextLine()) {
+        String taskString = fileScanner.nextLine();
+        String taskType = taskString.substring(1, 2);
+        boolean isDone = taskString.substring(4, 5).equals("X");
+        String taskName;
+        switch (taskType) {
+        case "T":
+            taskName = taskString.substring(7);
+            tasks.addTask(new TodoTask(taskName, isDone));
+            break;
+        case "D":
+            int byIndex = taskString.indexOf("(by: ");
+            taskName = taskString.substring(7, byIndex - 1);
+            String by = taskString.substring(byIndex + 5, taskString.length() - 1);
+            LocalDateTime byDateTime = LocalDateTime.parse(by, formatTo);
+            tasks.addTask(new DeadlineTask(taskName, byDateTime, isDone));
+            break;
+        case "E":
+            int fromIndex = taskString.indexOf("(from: ");
+            int toIndex = taskString.indexOf(" to: ");
+            taskName = taskString.substring(7, fromIndex - 1);
+            String from = taskString.substring(fromIndex + 7, toIndex);
+            String to = taskString.substring(toIndex + 5, taskString.length() - 1);
+            LocalDateTime fromDateTime = LocalDateTime.parse(from, formatTo);
+            LocalDateTime toDateTime = LocalDateTime.parse(to, formatTo);
+            tasks.addTask(new EventTask(taskName, fromDateTime, toDateTime, isDone));
+            break;
+        default:
+            break;
         }
     }
+}
 
     public void saveTasks() {
     try {

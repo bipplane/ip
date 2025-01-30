@@ -21,6 +21,12 @@ public class EventTask extends Task {
         this.to = LocalDateTime.parse(to, formatFrom);
     }
 
+    public EventTask(String taskName, LocalDateTime from, LocalDateTime to, boolean isDone) {
+        super(taskName, isDone);
+        this.from = from;
+        this.to = to;
+    }
+
     public String getFrom() {
         return from.format(formatTo);
     }
