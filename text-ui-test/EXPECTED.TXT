@@ -9,19 +9,19 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 2 Dec 2019 18:00)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
+[E][ ] project meeting (from: 3 Jan 2019 14:00 to: 3 Jan 2019 17:00)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][ ] read book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+2. [D][ ] return book (by: 2 Dec 2019 18:00)
+3. [E][ ] project meeting (from: 3 Jan 2019 14:00 to: 3 Jan 2019 17:00)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -37,12 +37,12 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Error: Unknown command: lidt
+Error: Gurl idk what you're saying..
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][ ] return book (by: Sunday)
-2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+1. [D][ ] return book (by: 2 Dec 2019 18:00)
+2. [E][ ] project meeting (from: 3 Jan 2019 14:00 to: 3 Jan 2019 17:00)
 ____________________________________________________________
 ____________________________________________________________
 Bye! Get an A for this mod and I'll reunite IZ*ONE for you <3
