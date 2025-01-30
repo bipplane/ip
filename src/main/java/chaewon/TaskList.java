@@ -1,3 +1,5 @@
+package chaewon;
+
 import tasks.*;
 
 import java.util.ArrayList;
@@ -20,40 +22,44 @@ public class TaskList {
         return tasks;
     }
 
-    public void markTaskAsDone(int index) throws ChaewonException {
+    public int getNumTasks() {
+        return tasks.size();
+    }
+
+    public Task markTaskAsDone(int index) throws ChaewonException {
         if (index < 0 || index >= tasks.size()) {
             throw new ChaewonException("Invalid task number. Please try again.");
         } else {
-            tasks.get(index).markAsDone();
-            Ui.markTask(tasks.get(index));
+            Task task = tasks.get(index);
+            task.markAsDone();
+            return task;
         }
     }
 
-    public void unmarkTaskAsDone(int index) throws ChaewonException {
+    public Task unmarkTaskAsDone(int index) throws ChaewonException {
         if (index < 0 || index >= tasks.size()) {
             throw new ChaewonException("Invalid task number. Please try again.");
         } else {
-            tasks.get(index).markAsUndone();
-            Ui.unmarkTask(tasks.get(index));
+            Task task = tasks.get(index);
+            task.markAsUndone();
+            return task;
         }
     }
 
-    public <T extends Task> void addTask(T task) throws ChaewonException {
+    public <T extends Task> T addTask(T task) throws ChaewonException {
         if (task == null) {
             throw new ChaewonException("Gurl what? Task cannot be null.");
         } else {
             tasks.add(task);
-            Ui.addTask(task, tasks.size());
+            return task;
         }
     }
 
-    public void deleteTask(int index) throws ChaewonException {
+    public Task removeTask(int index) throws ChaewonException {
         if (index < 0 || index >= tasks.size()) {
             throw new ChaewonException("Invalid task number. Please try again.");
         } else {
-            Task task = tasks.remove(index);
-            Ui.deleteTask(task, tasks.size());
+            return tasks.remove(index);
         }
     }
-
 }
