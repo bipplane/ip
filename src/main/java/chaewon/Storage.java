@@ -46,32 +46,30 @@ public class Storage {
     }
 
     public void saveTasks() {
-        try {
-            File file = new File("tasks.txt");
-            FileWriter fileWriter = new FileWriter(file);
-            for (Task task : tasks.getTasks()) {
-                String taskType = "";
-                if (task instanceof TodoTask) {
-                    taskType = "T";
-                } else if (task instanceof DeadlineTask) {
-                    taskType = "D";
-                } else if (task instanceof EventTask) {
-                    taskType = "E";
-                }
-                String isDone = task.isDone() ? "1" : "0";
-                String taskString = taskType + " | " + isDone
-                        + " | " + task.getTaskName();
-                if (task instanceof DeadlineTask) {
-                    taskString += " | " + ((DeadlineTask) task).getBy();
-                } else if (task instanceof EventTask) {
-                    taskString += " | " + ((EventTask) task).getFrom()
-                            + " | " + ((EventTask) task).getTo();
-                }
-                fileWriter.write(taskString + "\n");
+    try {
+        File file = new File(filePath);
+        FileWriter fileWriter = new FileWriter(file);
+        for (Task task : tasks.getTasks()) {
+            String taskType = "";
+            if (task instanceof TodoTask) {
+                taskType = "T";
+            } else if (task instanceof DeadlineTask) {
+                taskType = "D";
+            } else if (task instanceof EventTask) {
+                taskType = "E";
             }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error saving tasks to file.");
+            String isDone = task.isDone() ? "X" : " ";
+            String taskString = "[" + taskType + "][" + isDone + "] " + task.getTaskName();
+            if (task instanceof DeadlineTask) {
+                taskString += " (by: " + ((DeadlineTask) task).getBy() + ")";
+            } else if (task instanceof EventTask) {
+                taskString += " (from: " + ((EventTask) task).getFrom() + " to: " + ((EventTask) task).getTo() + ")";
+            }
+            fileWriter.write(taskString + "\n");
         }
+        fileWriter.close();
+    } catch (IOException e) {
+        System.out.println("Error saving tasks to file.");
+    }
     }
 }

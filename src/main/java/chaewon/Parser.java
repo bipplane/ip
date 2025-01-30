@@ -16,37 +16,44 @@ public class Parser {
 
         try {
             switch (command) {
-            case "hello":
-            case "hi":
+            case "hello", "hi":
                 c = new HelloCommand();
                 break;
-            case "goodbye":
-            case "bye":
+            case "bye", "goodbye", "exit":
                 c = new ExitCommand();
                 break;
-            case "todo":
+            case "todo", "task":
+                if (parts.length < 2) {
+                    throw new ChaewonException("The description of a todo cannot be empty.");
+                }
                 c = new TodoCommand(input.split("todo ")[1]);
                 break;
             case "deadline":
+                if (parts.length < 2) {
+                    throw new ChaewonException("The description of a deadline cannot be empty.");
+                }
                 c = new DeadlineCommand(input.split("deadline ")[1]);
                 break;
             case "event":
+                if (parts.length < 2) {
+                    throw new ChaewonException("The description of an event cannot be empty.");
+                }
                 c = new EventCommand(input.split("event ")[1]);
                 break;
-            case "list":
+            case "list", "show":
                 c = new ListCommand();
                 break;
-            case "mark":
+            case "mark", "check":
                 c = new MarkCommand(parts.length > 1
-                        ? Integer.parseInt(parts[1]) : -1);
+                        ? Integer.parseInt(parts[1]) - 1 : -1);
                 break;
-            case "unmark":
+            case "unmark", "uncheck":
                 c = new UnmarkCommand(parts.length > 1
-                        ? Integer.parseInt(parts[1]) : -1);
+                        ? Integer.parseInt(parts[1]) - 1 : -1);
                 break;
-            case "delete":
+            case "delete", "remove":
                 c = new DeleteCommand(parts.length > 1
-                        ? Integer.parseInt(parts[1]) : -1);
+                        ? Integer.parseInt(parts[1]) - 1 : -1);
                 break;
             default:
                 throw new ChaewonException("Gurl idk what you're saying..");

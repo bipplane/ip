@@ -9,9 +9,9 @@ public class EventCommand extends Command {
     private final String to;
 
     public EventCommand(String description) {
-        this.description = description.split(" /")[0];
-        this.from = description.split(" /")[1].split("from ")[1];
-        this.to = description.split(" /")[2].split("to ")[1];
+        this.description = description.split(" /")[0].trim();
+        this.from = description.split(" /")[1].split("from ")[1].trim();
+        this.to = description.split(" /")[2].split("to ")[1].trim();
     }
 
     @Override
@@ -19,5 +19,7 @@ public class EventCommand extends Command {
         EventTask newTask = new EventTask(description, from, to);
         tasks.addTask(newTask);
         storage.saveTasks();
+        ui.addedTask(newTask, tasks.getNumTasks());
+
     }
 }
