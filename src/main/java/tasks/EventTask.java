@@ -3,24 +3,50 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task.
+ */
 public class EventTask extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
     protected DateTimeFormatter formatFrom = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected DateTimeFormatter formatTo = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
 
+    /**
+     * Constructor for EventTask.
+     *
+     * @param taskName Name of the task.
+     * @param from Start time of the task.
+     * @param to End time of the task.
+     */
     public EventTask(String taskName, String from, String to) {
         super(taskName);
         this.from = LocalDateTime.parse(from, formatFrom);
         this.to = LocalDateTime.parse(to, formatFrom);
     }
 
+    /**
+     * Constructor for EventTask.
+     *
+     * @param taskName Name of the task.
+     * @param from Start time of the task.
+     * @param to End time of the task.
+     * @param isDone Status of the task.
+     */
     public EventTask(String taskName, String from, String to, boolean isDone) {
         super(taskName, isDone);
         this.from = LocalDateTime.parse(from, formatFrom);
         this.to = LocalDateTime.parse(to, formatFrom);
     }
 
+    /**
+     * Constructor for EventTask.
+     *
+     * @param taskName Name of the task.
+     * @param from Start time of the task.
+     * @param to End time of the task.
+     * @param isDone Status of the task.
+     */
     public EventTask(String taskName, LocalDateTime from, LocalDateTime to, boolean isDone) {
         super(taskName, isDone);
         this.from = from;

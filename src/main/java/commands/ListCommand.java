@@ -1,7 +1,12 @@
 package commands;
 
-import chaewon.*;
+import chaewon.Storage;
+import chaewon.TaskList;
+import chaewon.Ui;
 
+/**
+ * Represents a command to list all tasks.
+ */
 public class ListCommand extends Command {
 
     @Override
