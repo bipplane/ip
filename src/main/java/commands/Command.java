@@ -1,10 +1,22 @@
 package commands;
 
-import chaewon.*;
+import chaewon.ChaewonException;
+import chaewon.Storage;
+import chaewon.TaskList;
+import chaewon.Ui;
 
-public class Command {
+/**
+ * Represents a command that is executed by the user.
+ */
+public abstract class Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
-        throw new UnsupportedOperationException("This method is to be implemented by child classes");
-    }
+    /**
+     * Executes the command.
+     *
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The storage object.
+     * @throws ChaewonException If an error occurs during execution.
+     */
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException;
 }

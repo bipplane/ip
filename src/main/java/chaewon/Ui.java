@@ -1,7 +1,10 @@
 package chaewon;
 
-import tasks.*;
+import tasks.Task;
 
+/**
+ * Represents the user interface of the application.
+ */
 public class Ui {
 
     /**
@@ -14,10 +17,13 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Prints a hello message to the console.
+     */
     public void hello() {
         printUnderscore();
-        System.out.println("Hello! I'm Chaewon, " +
-                "leader of Korean girl group Le Sserafim!");
+        System.out.println("Hello! I'm Chaewon, "
+                + "leader of Korean girl group Le Sserafim!");
         printUnderscore();
     }
 
@@ -42,6 +48,11 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Marks a task as done.
+     * @param task The task to be marked as done.
+     * @param <T> The type of task.
+     */
     public <T extends Task> void markedTask(T task) {
         printUnderscore();
         System.out.println("Nice! I've marked this task as done:");
@@ -49,6 +60,11 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Marks a task as not done.
+     * @param task The task to be marked as not done.
+     * @param <T> The type of task.
+     */
     public <T extends Task> void unmarkedTask(T task) {
         printUnderscore();
         System.out.println("OK, I've marked this task as not done yet:");
@@ -56,6 +72,12 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Adds a task to the list of tasks.
+     * @param task The task to be added.
+     * @param size The size of the list of tasks.
+     * @param <T> The type of task.
+     */
     public <T extends Task> void addedTask(T task, int size) {
         printUnderscore();
         System.out.println("Got it. I've added this task:");
@@ -64,6 +86,12 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Deletes a task from the list of tasks.
+     * @param task The task to be deleted.
+     * @param size The size of the list of tasks.
+     * @param <T> The type of task.
+     */
     public <T extends Task> void deletedTask(T task, int size) {
         printUnderscore();
         System.out.println("Noted. I've removed this task:");
@@ -72,6 +100,10 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
+     * Shows the list of tasks.
+     * @param tasks The list of tasks.
+     */
     public void showTasks(TaskList tasks) {
         printUnderscore();
         if (tasks.getNumTasks() == 0) {
@@ -103,6 +135,8 @@ public class Ui {
         printUnderscore();
     }
 
+     * Prints a line of underscores to the console.
+     */
     public static void printUnderscore() {
         System.out.println("____________________________________________________________");
     }

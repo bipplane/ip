@@ -1,6 +1,15 @@
 package chaewon;
 
-import commands.*;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.ExitCommand;
+import commands.HelloCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.TodoCommand;
+import commands.UnmarkCommand;
 
 /**
  * Represents a parser that handles user input.
@@ -9,6 +18,12 @@ public class Parser {
     protected static String command;
     protected Ui ui = new Ui();
 
+    /**
+     * Parses the user input and returns the corresponding command.
+     *
+     * @param input The user input.
+     * @return The corresponding command.
+     */
     public Command parse(String input) {
         String[] parts = input.split(" ");
         String command = parts[0].toLowerCase();
