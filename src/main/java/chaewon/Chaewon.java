@@ -1,11 +1,11 @@
 package chaewon;
 
-import commands.*;
-
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import commands.Command;
+import commands.ExitCommand;
 
 /**
  * Represents the Chaewon chatbot.
@@ -18,11 +18,9 @@ public class Chaewon {
     private final Parser parser = new Parser();
     private boolean isExit = false;
 
-    public static void main(String[] args) {
-        Chaewon chaewon = new Chaewon();
-        chaewon.run();
-    }
-
+    /**
+     * Constructor for Chaewon.
+     */
     public Chaewon() {
         this.storage = new Storage("tasks.txt", taskList);
         try {
@@ -38,6 +36,19 @@ public class Chaewon {
         ui.welcome();
     }
 
+    /**
+     * Main method for Chaewon.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
+        Chaewon chaewon = new Chaewon();
+        chaewon.run();
+    }
+
+    /**
+     * Runs the Chaewon chatbot.
+     */
     public void run() {
         while (!isExit) {
             String input = scanner.nextLine();
@@ -47,7 +58,7 @@ public class Chaewon {
                     c.execute(taskList, ui, storage);
                 }
                 if (c instanceof ExitCommand) {
-                isExit = true;
+                    isExit = true;
                 }
             } catch (ChaewonException e) {
                 ui.printMessage(e.getMessage());
