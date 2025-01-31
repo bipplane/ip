@@ -135,6 +135,7 @@ public class Ui {
         printUnderscore();
     }
 
+    /**
      * Prints a line of underscores to the console.
      */
     public static void printUnderscore() {

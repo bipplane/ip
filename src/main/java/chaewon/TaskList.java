@@ -2,7 +2,10 @@ package chaewon;
 
 import java.util.ArrayList;
 
+import tasks.DeadlineTask;
+import tasks.EventTask;
 import tasks.Task;
+import tasks.TodoTask;
 
 /**
  * Represents a list of tasks.
@@ -41,7 +44,7 @@ public class TaskList {
             }
         }
         return foundTasksList;
-}
+    }
 
     public int getNumTasks() {
         return tasks.size();
