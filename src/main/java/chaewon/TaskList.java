@@ -25,6 +25,24 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Finds tasks with the given keyword.
+     *
+     * @param keyword The keyword to search for.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> foundTasksList = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTaskName().toLowerCase().contains(keyword.toLowerCase())
+                    || (keyword.equalsIgnoreCase("event") && task instanceof EventTask)
+                    || (keyword.equalsIgnoreCase("deadline") && task instanceof DeadlineTask)
+                    || (keyword.equalsIgnoreCase("todo") && task instanceof TodoTask)) {
+                foundTasksList.add(task);
+            }
+        }
+        return foundTasksList;
+}
+
     public int getNumTasks() {
         return tasks.size();
     }
