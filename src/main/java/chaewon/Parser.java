@@ -31,6 +31,12 @@ public class Parser {
 
         try {
             switch (command) {
+            case "find", "search":
+                if (parts.length < 2) {
+                    throw new ChaewonException("The keyword to search for cannot be empty.");
+                }
+                c = new FindCommand(input.split("find ")[1]);
+                break;
             case "hello", "hi":
                 c = new HelloCommand();
                 break;

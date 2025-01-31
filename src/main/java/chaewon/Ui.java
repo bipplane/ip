@@ -118,6 +118,23 @@ public class Ui {
     }
 
     /**
+     * Prints the tasks that match the keyword.
+     *
+     * @param tasks The list of tasks that match the keyword.
+     */
+    public void showFoundTasks(TaskList tasks) {
+        printUnderscore();
+        if (tasks.getNumTasks() == 0) {
+            System.out.println("No matching tasks found.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.getNumTasks(); i++) {
+                System.out.println((i + 1) + ". " + tasks.getTasks().get(i).toString());
+            }
+        }
+        printUnderscore();
+    }
+
      * Prints a line of underscores to the console.
      */
     public static void printUnderscore() {
