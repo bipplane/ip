@@ -1,13 +1,24 @@
 package commands;
 
-import chaewon.*;
+import chaewon.ChaewonException;
+import chaewon.Storage;
+import chaewon.TaskList;
+import chaewon.Ui;
 import tasks.EventTask;
 
+/**
+ * Represents a command to add an event task.
+ */
 public class EventCommand extends Command {
     private final String description;
     private final String from;
     private final String to;
 
+    /**
+     * Constructor for EventCommand.
+     *
+     * @param description The description of the event task.
+     */
     public EventCommand(String description) {
         this.description = description.split(" /")[0].trim();
         this.from = description.split(" /")[1].split("from ")[1].trim();
