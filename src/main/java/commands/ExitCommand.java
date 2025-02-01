@@ -11,8 +11,8 @@ import chaewon.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         storage.saveTasks();
-        ui.goodbye();
+        return ui.goodbye();
     }
 }

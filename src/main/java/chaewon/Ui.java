@@ -8,68 +8,57 @@ import tasks.Task;
 public class Ui {
 
     /**
-     * Prints a welcome message to the console.
+     * Returns a welcome message.
      */
-    public void welcome() {
-        printUnderscore();
-        System.out.println("Hello! I'm Kim Chaewon!");
-        System.out.println("What can I do for you?");
-        printUnderscore();
+    public String welcome() {
+        return "Hello! I'm Kim Chaewon!\n"
+                + "What can I do for you?";
     }
 
     /**
-     * Prints a hello message to the console.
+     * Returns a hello message.
      */
-    public void hello() {
-        printUnderscore();
-        System.out.println("Hello! I'm Chaewon, "
-                + "leader of Korean girl group Le Sserafim!");
-        printUnderscore();
+    public String hello() {
+        return "Hello! I'm Chaewon, leader of Korean girl group Le Sserafim!";
     }
 
     /**
-     * Prints a goodbye message to the console.
+     * Returns a goodbye message.
      */
-    public void goodbye() {
-        printUnderscore();
-        System.out.println("Bye! Get an A for this mod and "
-                + "I'll reunite IZ*ONE for you <3");
-        printUnderscore();
+    public String goodbye() {
+        return "Bye! Get an A for this mod and I'll reunite IZ*ONE for you <3";
     }
 
     /**
-     * Prints a message to the console.
+     * Returns a message.
      *
-     * @param message The message to be printed.
+     * @param message The message to be returned.
+     * @return The message.
      */
-    public void printMessage(String message) {
-        printUnderscore();
-        System.out.println(message);
-        printUnderscore();
+    public String printMessage(String message) {
+        return message;
     }
 
     /**
      * Marks a task as done.
      * @param task The task to be marked as done.
      * @param <T> The type of task.
+     * @return The string of the task that was marked as done.
      */
-    public <T extends Task> void markedTask(T task) {
-        printUnderscore();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
-        printUnderscore();
+    public <T extends Task> String markedTask(T task) {
+        return "Nice! I've marked this task as done:\n"
+                + task.toString();
     }
 
     /**
      * Marks a task as not done.
      * @param task The task to be marked as not done.
      * @param <T> The type of task.
+     * @return The string of the task that was marked as not done.
      */
-    public <T extends Task> void unmarkedTask(T task) {
-        printUnderscore();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task.toString());
-        printUnderscore();
+    public <T extends Task> String unmarkedTask(T task) {
+        return "OK, I've marked this task as not done yet:\n"
+                + task.toString();
     }
 
     /**
@@ -77,13 +66,12 @@ public class Ui {
      * @param task The task to be added.
      * @param size The size of the list of tasks.
      * @param <T> The type of task.
+     * @return The string of the task that was added.
      */
-    public <T extends Task> void addedTask(T task, int size) {
-        printUnderscore();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + size + " tasks in the list.");
-        printUnderscore();
+    public <T extends Task> String addedTask(T task, int size) {
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -91,54 +79,48 @@ public class Ui {
      * @param task The task to be deleted.
      * @param size The size of the list of tasks.
      * @param <T> The type of task.
+     * @return The string of the task that was deleted.
      */
-    public <T extends Task> void deletedTask(T task, int size) {
-        printUnderscore();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + size + " tasks in the list.");
-        printUnderscore();
+    public <T extends Task> String deletedTask(T task, int size) {
+        return "Noted. I've removed this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
      * Shows the list of tasks.
      * @param tasks The list of tasks.
+     * @return The string of the list of tasks.
      */
-    public void showTasks(TaskList tasks) {
-        printUnderscore();
+    public String showTasks(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
         if (tasks.getNumTasks() == 0) {
-            System.out.println("You have no tasks in your list. Slay!");
+            sb.append("You have no tasks in your list. Slay!\n");
         } else {
-            System.out.println("Here are the tasks in your list:");
+            sb.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.getNumTasks(); i++) {
-                System.out.println((i + 1) + ". " + tasks.getTasks().get(i).toString());
+                sb.append((i + 1)).append(". ").append(tasks.getTasks().get(i).toString()).append("\n");
             }
         }
-        printUnderscore();
+        return sb.toString();
     }
 
     /**
-     * Prints the tasks that match the keyword.
+     * Shows the tasks that match the keyword.
      *
      * @param tasks The list of tasks that match the keyword.
+     * @return The string of the tasks that match the keyword.
      */
-    public void showFoundTasks(TaskList tasks) {
-        printUnderscore();
+    public String showFoundTasks(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
         if (tasks.getNumTasks() == 0) {
-            System.out.println("No matching tasks found.");
+            sb.append("No matching tasks found.\n");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            sb.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < tasks.getNumTasks(); i++) {
-                System.out.println((i + 1) + ". " + tasks.getTasks().get(i).toString());
+                sb.append((i + 1)).append(". ").append(tasks.getTasks().get(i).toString()).append("\n");
             }
         }
-        printUnderscore();
-    }
-
-    /**
-     * Prints a line of underscores to the console.
-     */
-    public static void printUnderscore() {
-        System.out.println("____________________________________________________________");
+        return sb.toString();
     }
 }

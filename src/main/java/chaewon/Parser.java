@@ -3,6 +3,7 @@ package chaewon;
 import commands.Command;
 import commands.DeadlineCommand;
 import commands.DeleteCommand;
+import commands.ErrorCommand;
 import commands.EventCommand;
 import commands.ExitCommand;
 import commands.FindCommand;
@@ -28,7 +29,7 @@ public class Parser {
     public Command parse(String input) {
         String[] parts = input.split(" ");
         String command = parts[0].toLowerCase();
-        Command c = null;
+        Command c;
 
         try {
             switch (command) {
@@ -81,18 +82,8 @@ public class Parser {
                 throw new ChaewonException("Gurl idk what you're saying..");
             }
         } catch (ChaewonException e) {
-            printUnderscore();
-            System.out.println("Error: " + e.getMessage());
-            printUnderscore();
+            return new ErrorCommand(e.getMessage());
         }
         return c;
     }
-
-    /**
-     * Prints a line of underscores to the console.
-     */
-    public static void printUnderscore() {
-        System.out.println("____________________________________________________________");
-    }
-
 }

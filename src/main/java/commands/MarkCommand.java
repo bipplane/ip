@@ -22,9 +22,9 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         Task task = tasks.markTaskAsDone(taskIndex);
         storage.saveTasks();
-        ui.markedTask(task);
+        return ui.markedTask(task);
     }
 }

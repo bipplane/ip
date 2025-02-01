@@ -37,7 +37,7 @@ public class Chaewon {
     }
 
     /**
-     * Main method for Chaewon.
+     * Main method for Chaewon. (Defunct due to GUI)
      *
      * @param args Command line arguments.
      */
@@ -47,7 +47,7 @@ public class Chaewon {
     }
 
     /**
-     * Runs the Chaewon chatbot.
+     * Runs the Chaewon chatbot. (Defunct due to GUI)
      */
     public void run() {
         while (!isExit) {
@@ -64,5 +64,22 @@ public class Chaewon {
                 ui.printMessage(e.getMessage());
             }
         }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            String response = c.execute(taskList, ui, storage);
+            if (c instanceof ExitCommand) {
+                isExit = true;
+            }
+            return response;
+        } catch (ChaewonException e) {
+            return ui.printMessage(e.getMessage());
+        }
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }

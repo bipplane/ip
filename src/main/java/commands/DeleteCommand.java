@@ -22,9 +22,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         Task removedTask = tasks.removeTask(taskIndex);
-        ui.deletedTask(removedTask, tasks.getNumTasks());
         storage.saveTasks();
+        return ui.deletedTask(removedTask, tasks.getNumTasks());
     }
 }

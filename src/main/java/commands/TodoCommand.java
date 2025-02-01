@@ -22,9 +22,9 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         TodoTask newTask = tasks.addTask(new TodoTask(description));
         storage.saveTasks();
-        ui.addedTask(newTask, tasks.getNumTasks());
+        return ui.addedTask(newTask, tasks.getNumTasks());
     }
 }
