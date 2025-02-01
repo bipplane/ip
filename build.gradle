@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClass.set("chaewon.Chaewon")
+    mainClass.set("Launcher")
 }
 
 shadowJar {
