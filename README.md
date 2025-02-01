@@ -1,6 +1,16 @@
 <h1 align="center">CS2103T Individual Project 😺</h1>
 
-This is my very own individual software project, featuring a chatbot named after the talented and beloved Kim Chaewon! I will be dedicating my efforts towards this project throughout AY24/25 Semester 2 to develop the essential skills needed in the expansive field of software engineering. WIZ*ONE FOREVER!!
+This is my very own individual software project, featuring a chatbot named after the absolute **BADDIE** known as Kim Chaewon! I will be dedicating my efforts towards this project throughout AY24/25 Semester 2 to develop the essential skills needed in the expansive field of software engineering. WIZ*ONE FOREVER!!
+
+<p align="center">
+<img 
+   src="https://kpopping.com/documents/74/4/800/240301-LE-SSERAFIM-Chaewon-Music-Korea-Fansign-Event-documents-1.jpeg?v=73392" 
+   height = "425"
+   object-position: 50% 50%;
+   width = "400"
+   alt="Chaewon">
+</p>
+<p align="center"> Winky face! 😉 </p> 
 
 <h2 align="center"> Setting up in IntelliJ </h2>
 
@@ -29,13 +39,3 @@ This is my very own individual software project, featuring a chatbot named after
    ```
 
 **Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
-
-<h2 align="center"> Warning: Absolute BADDIE </h2>
-<p align="center">
-<img 
-   src="https://kpopping.com/documents/74/4/800/240301-LE-SSERAFIM-Chaewon-Music-Korea-Fansign-Event-documents-1.jpeg?v=73392" 
-   height = "425"
-   object-position: 50% 50%;
-   width = "400"
-   alt="Chaewon">
-</p>
