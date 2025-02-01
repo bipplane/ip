@@ -24,8 +24,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ChaewonException {
         ArrayList<Task> foundTasksList = taskList.findTasks(keyword);
-        ui.showFoundTasks(new TaskList(foundTasksList));
+        return ui.showFoundTasks(new TaskList(foundTasksList));
     }
 }

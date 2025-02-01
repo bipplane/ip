@@ -26,11 +26,10 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         EventTask newTask = new EventTask(description, from, to);
         tasks.addTask(newTask);
         storage.saveTasks();
-        ui.addedTask(newTask, tasks.getNumTasks());
-
+        return ui.addedTask(newTask, tasks.getNumTasks());
     }
 }

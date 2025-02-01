@@ -16,7 +16,8 @@ public abstract class Command {
      * @param tasks   The list of tasks.
      * @param ui      The user interface.
      * @param storage The storage object.
+     * @return The response to the user.
      * @throws ChaewonException If an error occurs during execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException;
 }

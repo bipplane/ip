@@ -22,9 +22,9 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         Task task = tasks.unmarkTaskAsDone(taskIndex);
         storage.saveTasks();
-        ui.unmarkedTask(task);
+        return ui.unmarkedTask(task);
     }
 }

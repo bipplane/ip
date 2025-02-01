@@ -8,7 +8,7 @@ import commands.Command;
 import commands.ExitCommand;
 
 /**
- * Represents the Chaewon chatbot.
+ * Represents the chaewon.Chaewon chatbot.
  */
 public class Chaewon {
     private final Scanner scanner = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class Chaewon {
     private boolean isExit = false;
 
     /**
-     * Constructor for Chaewon.
+     * Constructor for chaewon.Chaewon.
      */
     public Chaewon() {
         this.storage = new Storage("tasks.txt", taskList);
@@ -37,7 +37,7 @@ public class Chaewon {
     }
 
     /**
-     * Main method for Chaewon.
+     * Main method for chaewon.Chaewon. (Defunct due to GUI)
      *
      * @param args Command line arguments.
      */
@@ -47,7 +47,7 @@ public class Chaewon {
     }
 
     /**
-     * Runs the Chaewon chatbot.
+     * Runs the Chaewon chatbot. (Defunct due to GUI)
      */
     public void run() {
         while (!isExit) {
@@ -63,6 +63,15 @@ public class Chaewon {
             } catch (ChaewonException e) {
                 ui.printMessage(e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (ChaewonException e) {
+            return ui.printMessage(e.getMessage());
         }
     }
 }

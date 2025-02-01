@@ -24,10 +24,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChaewonException {
         DeadlineTask newTask = new DeadlineTask(description, by);
         tasks.addTask(newTask);
         storage.saveTasks();
-        ui.addedTask(newTask, tasks.getNumTasks());
+        return ui.addedTask(newTask, tasks.getNumTasks());
     }
 }
