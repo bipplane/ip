@@ -20,7 +20,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            stage.setTitle("chaewon.Chaewon.exe");
+            stage.setTitle("Chaewon.exe");
             stage.getIcons().add(new Image("file:src/main/resources/images/icon.png"));
 
             Scene scene = new Scene(ap);
