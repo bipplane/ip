@@ -1,11 +1,22 @@
 package chaewon;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import tasks.Task;
 
 /**
  * Represents the user interface of the application.
  */
 public class Ui {
+    private final List<String> helloMessages = Arrays.asList(
+        "Hello! I'm Chaewon, leader of Korean girl group Le Sserafim!",
+        "Hi there! Chaewon here, ready to assist you!",
+        "Hey! It's Chaewon, how can I help you today?",
+        "Yo! It's Chaewon-dayo!"
+    );
+    private final Random random = new Random();
 
     /**
      * Returns a welcome message.
@@ -19,7 +30,8 @@ public class Ui {
      * Returns a hello message.
      */
     public String hello() {
-        return "Hello! I'm Chaewon, leader of Korean girl group Le Sserafim!";
+        int index = random.nextInt(helloMessages.size());
+        return helloMessages.get(index);
     }
 
     /**

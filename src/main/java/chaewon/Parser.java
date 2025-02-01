@@ -39,10 +39,10 @@ public class Parser {
                 }
                 c = new FindCommand(input.split("find ")[1]);
                 break;
-            case "hello", "hi":
+            case "hello", "hi", "hey", "yo", "sup":
                 c = new HelloCommand();
                 break;
-            case "bye", "goodbye", "exit":
+            case "bye", "goodbye", "exit", "quit", "cya":
                 c = new ExitCommand();
                 break;
             case "todo", "task":
@@ -63,7 +63,7 @@ public class Parser {
                 }
                 c = new EventCommand(input.split("event ")[1]);
                 break;
-            case "list", "show":
+            case "list", "show", "tasks":
                 c = new ListCommand();
                 break;
             case "mark", "check":
