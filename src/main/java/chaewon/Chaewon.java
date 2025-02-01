@@ -69,9 +69,17 @@ public class Chaewon {
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
-            return c.execute(taskList, ui, storage);
+            String response = c.execute(taskList, ui, storage);
+            if (c instanceof ExitCommand) {
+                isExit = true;
+            }
+            return response;
         } catch (ChaewonException e) {
             return ui.printMessage(e.getMessage());
         }
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }
