@@ -1,13 +1,13 @@
 <h1 align="center">CS2103T Individual Project 😺</h1>
 
 This is my very own individual software project, featuring a chatbot named after the absolute **BADDIE** known as Kim Chaewon! I will be dedicating my efforts towards this project throughout AY24/25 Semester 2 to develop the essential skills needed in the expansive field of software engineering. WIZ*ONE FOREVER!!
+<br/><br/>
 
 <p align="center">
 <img 
    src="https://kpopping.com/documents/74/4/800/240301-LE-SSERAFIM-Chaewon-Music-Korea-Fansign-Event-documents-1.jpeg?v=73392" 
-   height = "425"
+   height = "500"
    object-position: 50% 50%;
-   width = "400"
    alt="Chaewon">
 </p>
 <p align="center"> Winky face! 😉 </p> 
