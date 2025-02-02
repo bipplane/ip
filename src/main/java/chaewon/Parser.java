@@ -26,7 +26,7 @@ public class Parser {
      * @param input The user input.
      * @return The corresponding command.
      */
-    public Command parse(String input) {
+    public Command parse(String input) throws ChaewonException {
         String[] parts = input.split(" ");
         String command = parts[0].toLowerCase();
         Command c;

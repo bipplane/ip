@@ -25,7 +25,7 @@ public class Main extends Application {
 
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setMinHeight(220);
+            stage.setMinHeight(300);
             stage.setMinWidth(417);
             // stage.setMaxWidth(417); // Add this if you didn't automatically resize elements
             fxmlLoader.<MainWindow>getController().setChaewon(chaewon); // inject the Chaewon instance
