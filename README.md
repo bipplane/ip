@@ -6,7 +6,7 @@ This is my very own individual software project, featuring a chatbot named after
 <p align="center">
 <img 
    src="https://kpopping.com/documents/74/4/800/240301-LE-SSERAFIM-Chaewon-Music-Korea-Fansign-Event-documents-1.jpeg?v=73392" 
-   height = "500"
+   height = "400"
    object-position: 50% 50%;
    alt="Chaewon">
 </p>
