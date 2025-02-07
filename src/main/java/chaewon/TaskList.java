@@ -21,6 +21,7 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks should not be null";
         this.tasks = tasks;
     }
 
@@ -44,6 +45,7 @@ public class TaskList {
             }
         }
         return foundTasksList;
+        assert keyword != null && !keyword.isEmpty() : "Keyword should not be null or empty";
     }
 
     public int getNumTasks() {

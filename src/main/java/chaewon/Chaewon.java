@@ -53,6 +53,7 @@ public class Chaewon {
         while (!isExit) {
             String input = scanner.nextLine();
             Command c = parser.parse(input);
+            assert c != null : "Command should not be null";
             try {
                 if (c != null) {
                     c.execute(taskList, ui, storage);
@@ -69,6 +70,7 @@ public class Chaewon {
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
+            assert c != null : "Command should not be null";
             String response = c.execute(taskList, ui, storage);
             if (c instanceof ExitCommand) {
                 isExit = true;

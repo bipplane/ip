@@ -48,6 +48,7 @@ public class Ui {
      * @return The message.
      */
     public String printMessage(String message) {
+        assert message != null : "Message should not be null";
         return message;
     }
 
@@ -58,6 +59,7 @@ public class Ui {
      * @return The string of the task that was marked as done.
      */
     public <T extends Task> String markedTask(T task) {
+        assert task != null : "Task should not be null";
         return "Nice! I've marked this task as done:\n"
                 + task.toString();
     }
@@ -69,6 +71,7 @@ public class Ui {
      * @return The string of the task that was marked as not done.
      */
     public <T extends Task> String unmarkedTask(T task) {
+        assert task != null : "Task should not be null";
         return "OK, I've marked this task as not done yet:\n"
                 + task.toString();
     }
@@ -81,6 +84,8 @@ public class Ui {
      * @return The string of the task that was added.
      */
     public <T extends Task> String addedTask(T task, int size) {
+        assert task != null : "Task should not be null";
+        assert size >= 0 : "Size should be non-negative";
         return "Got it. I've added this task:\n"
                 + task.toString() + "\n"
                 + "Now you have " + size + " tasks in the list.";
@@ -94,6 +99,8 @@ public class Ui {
      * @return The string of the task that was deleted.
      */
     public <T extends Task> String deletedTask(T task, int size) {
+        assert task != null : "Task should not be null";
+        assert size >= 0 : "Size should be non-negative";
         return "Noted. I've removed this task:\n"
                 + task.toString() + "\n"
                 + "Now you have " + size + " tasks in the list.";
@@ -105,6 +112,7 @@ public class Ui {
      * @return The string of the list of tasks.
      */
     public String showTasks(TaskList tasks) {
+        assert tasks != null : "Task list should not be null";
         StringBuilder sb = new StringBuilder();
         if (tasks.getNumTasks() == 0) {
             sb.append("You have no tasks in your list. Slay!\n");
@@ -124,6 +132,7 @@ public class Ui {
      * @return The string of the tasks that match the keyword.
      */
     public String showFoundTasks(TaskList tasks) {
+        assert tasks != null : "Task list should not be null";
         StringBuilder sb = new StringBuilder();
         if (tasks.getNumTasks() == 0) {
             sb.append("No matching tasks found.\n");
