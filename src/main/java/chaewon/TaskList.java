@@ -98,6 +98,8 @@ public class TaskList {
     public <T extends Task> T addTask(T task) throws ChaewonException {
         if (task == null) {
             throw new ChaewonException("Gurl what? Task cannot be null.");
+        } else if (task instanceof EventTask && hasConflict(task)) {
+            throw new ChaewonException("Oh noes! This task conflicts with another event task!");
         } else {
             tasks.add(task);
             return task;
@@ -117,5 +119,17 @@ public class TaskList {
         } else {
             return tasks.remove(index);
         }
+    }
+
+    /**
+     * Checks if the given task conflicts with any existing tasks.
+     *
+     * @param newTask The task to check for conflicts.
+     * @return true if there is a conflict, false otherwise.
+     */
+    public boolean hasConflict(Task newTask) {
+        return tasks.stream()
+                .anyMatch(task -> task instanceof EventTask
+                        && ((EventTask) task).hasConflict((EventTask) newTask));
     }
 }

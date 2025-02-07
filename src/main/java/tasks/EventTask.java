@@ -61,6 +61,17 @@ public class EventTask extends Task {
         return from.format(formatTo);
     }
 
+    /**
+     * Checks if the task has a conflict with another task.
+     *
+     * @param task The task to check for conflict.
+     * @return True if there is a conflict, false otherwise.
+     */
+    public boolean hasConflict(EventTask task) {
+        return (this.from.isBefore(task.to) && this.to.isAfter(task.from))
+                || (this.from.isEqual(task.from) || this.to.isEqual(task.to));
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from.format(formatTo) + " to: " + to.format(formatTo) + ")";
