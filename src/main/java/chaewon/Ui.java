@@ -119,9 +119,10 @@ public class Ui {
             sb.append("You have no tasks in your list. Slay!\n");
         } else {
             sb.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.getNumTasks(); i++) {
-                sb.append((i + 1)).append(". ").append(tasks.getTasks().get(i).toString()).append("\n");
-            }
+            tasks.getTasks().stream()
+                    .map(task -> (tasks.getTasks().indexOf(task) + 1)
+                            + ". " + task.toString())
+                    .forEach(taskString -> sb.append(taskString).append("\n"));
         }
         return sb.toString();
     }
@@ -139,9 +140,10 @@ public class Ui {
             sb.append("No matching tasks found.\n");
         } else {
             sb.append("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < tasks.getNumTasks(); i++) {
-                sb.append((i + 1)).append(". ").append(tasks.getTasks().get(i).toString()).append("\n");
-            }
+            tasks.getTasks().stream()
+                    .map(task -> (tasks.getTasks().indexOf(task) + 1)
+                            + ". " + task.toString())
+                    .forEach(taskString -> sb.append(taskString).append("\n"));
         }
         return sb.toString();
     }
