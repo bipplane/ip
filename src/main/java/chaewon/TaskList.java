@@ -1,6 +1,7 @@
 package chaewon;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import tasks.DeadlineTask;
 import tasks.EventTask;
@@ -14,12 +15,17 @@ public class TaskList {
     protected ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for empty TaskList.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList with tasks.
+     *
+     * @param tasks The list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         assert tasks != null : "Tasks should not be null";
         this.tasks = tasks;
