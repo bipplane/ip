@@ -42,7 +42,7 @@ public class Chaewon {
     }
 
     /**
-     * Main method for Chaewon. (Defunct due to GUI)
+     * gui.Main method for Chaewon. (Defunct due to GUI)
      *
      * @param args Command line arguments.
      */
