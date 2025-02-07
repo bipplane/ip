@@ -20,9 +20,14 @@ public class EventCommand extends Command {
      * @param description The description of the event task.
      */
     public EventCommand(String description) {
+        assert description.contains(" /from ") : "Event command should contain /from";
+        assert description.contains(" /to ") : "Event command should contain /to";
         this.description = description.split(" /")[0].trim();
+        assert !this.description.isBlank() : "Event command should contain a description";
         this.from = description.split(" /")[1].split("from ")[1].trim();
+        assert !this.from.isBlank() : "Event command should contain a from";
         this.to = description.split(" /")[2].split("to ")[1].trim();
+        assert !this.to.isBlank() : "Event command should contain a to";
     }
 
     @Override

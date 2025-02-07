@@ -19,8 +19,11 @@ public class DeadlineCommand extends Command {
      * @param description The description of the deadline task.
      */
     public DeadlineCommand(String description) {
+        assert description.contains(" /by ") : "Deadline command should contain /by";
         this.description = description.split(" /by ")[0].trim();
         this.by = description.split(" /by ")[1].trim();
+        assert !this.description.isBlank() : "Deadline command should contain a description";
+        assert !this.by.isBlank() : "Deadline command should contain a by";
     }
 
     @Override
