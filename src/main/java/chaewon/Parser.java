@@ -27,6 +27,7 @@ public class Parser {
      * @return The corresponding command.
      */
     public Command parse(String input) throws ChaewonException {
+        assert input != null : "Input should not be null";
         String[] parts = input.split(" ");
         String command = parts[0].toLowerCase();
         Command c;

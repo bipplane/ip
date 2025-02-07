@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
      * @param description The description of the todo task.
      */
     public TodoCommand(String description) {
+        assert !description.isBlank() : "Todo command should contain a description";
         this.description = description;
     }
 

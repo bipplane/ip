@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null && !input.isEmpty() : "Input should not be empty";
         dialogueContainer.getChildren().add(
                 DialogueBox.getUserDialogue(input, userImage)
         );
