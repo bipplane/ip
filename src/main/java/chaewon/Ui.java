@@ -38,7 +38,8 @@ public class Ui {
      * Returns a goodbye message.
      */
     public String goodbye() {
-        return "Bye! Get an A for this mod and I'll reunite IZ*ONE for you <3";
+        return "Bye! Get an A for this mod and "
+                + "I'll reunite IZ*ONE for you <3";
     }
 
     /**

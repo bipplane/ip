@@ -11,22 +11,27 @@ import commands.ExitCommand;
  * Represents the Chaewon chatbot.
  */
 public class Chaewon {
-    private final Scanner scanner = new Scanner(System.in);
-    private final Ui ui = new Ui();
-    private final TaskList taskList = new TaskList();
+    private final Scanner scanner;
+    private final Ui ui;
+    private final TaskList taskList;
     private final Storage storage;
-    private final Parser parser = new Parser();
+    private final Parser parser;
     private boolean isExit = false;
 
     /**
      * Constructor for Chaewon.
      */
     public Chaewon() {
-        this.storage = new Storage("tasks.txt", taskList);
+        String filePath = "tasks.txt";
+        this.scanner = new Scanner(System.in);
+        this.ui = new Ui();
+        this.taskList = new TaskList();
+        this.storage = new Storage(filePath, taskList);
+        this.parser = new Parser();
         try {
             storage.loadTasks();
         } catch (FileNotFoundException e) {
-            File file = new File("tasks.txt");
+            File file = new File(filePath);
             try {
                 file.createNewFile();
             } catch (Exception ex) {
@@ -54,9 +59,7 @@ public class Chaewon {
             String input = scanner.nextLine();
             Command c = parser.parse(input);
             try {
-                if (c != null) {
-                    c.execute(taskList, ui, storage);
-                }
+                c.execute(taskList, ui, storage);
                 if (c instanceof ExitCommand) {
                     isExit = true;
                 }
@@ -66,6 +69,12 @@ public class Chaewon {
         }
     }
 
+    /**
+     * Gets the response from Chaewon.
+     *
+     * @param input The user input.
+     * @return The response from Chaewon.
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);

@@ -18,10 +18,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             stage.setTitle("Chaewon.exe");
-            stage.getIcons().add(new Image("file:src/main/resources/images/icon.png"));
+            stage.getIcons().add(new Image(
+                    "file:src/main/resources/images/icon.png"));
 
             Scene scene = new Scene(ap);
             stage.setScene(scene);
