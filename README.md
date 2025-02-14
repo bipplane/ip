@@ -1,5 +1,7 @@
 <h1 align="center">CS2103T Individual Project 😺</h1>
 
+[Link to user guide](https://bipplane.github.io/ip/)
+
 This is my very own individual software project, featuring a chatbot named after the absolute **BADDIE** known as Kim Chaewon! I will be dedicating my efforts towards this project throughout AY24/25 Semester 2 to develop the essential skills needed in the expansive field of software engineering. WIZ*ONE FOREVER!!
 <br/><br/>
 
