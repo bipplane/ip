@@ -53,7 +53,7 @@ public class DialogueBox extends HBox {
         return new DialogueBox(text, img);
     }
 
-    public static DialogueBox getDukeDialogue(String text, Image img) {
+    public static DialogueBox getChaewonDialogue(String text, Image img) {
         var db = new DialogueBox(text, img);
         db.flip();
         return db;

@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Chaewon instance */
     public void setChaewon(Chaewon chaewon) {
         this.chaewon = chaewon;
     }
@@ -60,10 +60,10 @@ public class MainWindow extends AnchorPane {
         delay.setOnFinished(event -> {
             String response = chaewon.getResponse(input);
             dialogueContainer.getChildren().add(
-                    DialogueBox.getDukeDialogue(response, chaewonImage)
+                    DialogueBox.getChaewonDialogue(response, chaewonImage)
             );
             if (chaewon.isExit()) {
-                PauseTransition exitDelay = new PauseTransition(Duration.seconds(3));
+                PauseTransition exitDelay = new PauseTransition(Duration.seconds(2));
                 exitDelay.setOnFinished(e -> {
                     Stage stage = (Stage) dialogueContainer.getScene().getWindow();
                     stage.close();

@@ -8,11 +8,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" promptText="Type here..." />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
+        <TextField fx:id="userInput" layoutX="3.0" layoutY="858.0" onAction="#handleUserInput" opacity="0.9" prefHeight="41.0" prefWidth="324.0" style="-fx-border-color: #ff9cb4; -fx-background-color: aliceBlue; " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="82.0" promptText="Type here..." />
+        <Button fx:id="sendButton" alignment="CENTER" layoutX="533.0" layoutY="862.0" mnemonicParsing="false" onAction="#handleUserInput" opacity="0.9" prefHeight="41.0" prefWidth="76.0" style="-fx-border-color: #ff9cb4; -fx-background-color: aliceBlue;" text="Send" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="3.0" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogueContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogueContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-color: transparent; -fx-control-inner-background: transparent;"/>
             </content>
         </ScrollPane>
     </children>
