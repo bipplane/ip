@@ -9,7 +9,16 @@
 
 .text-field {
     -fx-background-color: #d9ffe2;
-    -fx-font: 18px "Consolas";
+    -fx-font: 12px "Consolas";
+    -fx-text-overrun: clip;
+    -fx-text-box-border: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-field .content {
+    -fx-text-alignment: left;
+    -fx-wrap-text: true;
 }
 
 .button {
